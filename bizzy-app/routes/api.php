@@ -24,3 +24,13 @@ Route::group(['prefix' => 'user'], function(){
     Route::delete('/{id}', 'UserController@delete')->name('user.delete');
 });
 
+Route::group(['prefix' => 'projects'], function(){
+    Route::get('/', 'ProjectController@index');
+    Route::post('/', 'ProjectController@store');
+    Route::get('/{id}', 'ProjectController@show');
+    Route::put('/{project}', 'ProjectController@markAsCompleted');
+});
+
+Route::post('tasks', 'TaskController@store');
+Route::put('tasks/{task}', 'TaskController@markAsCompleted');
+
