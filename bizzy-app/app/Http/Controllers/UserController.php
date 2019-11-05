@@ -53,7 +53,8 @@ class UserController extends Controller
 
         return response()->json([
                 'id' => $user->id,
-                'name' => $user->email,
+                'name' => $user->name,
+                'email' => $user->email,
                 'status' => 'true'
             ], 200);
     }
