@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
 use App\User;
 
 class UserController extends Controller
@@ -17,7 +18,7 @@ class UserController extends Controller
     public function store(Request $request)
     {   
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email:filter|unique:users',
             'name' => 'required|string|max:50'
         ],
         [
@@ -29,6 +30,7 @@ class UserController extends Controller
 
         if ($validator->fails()) {
             $failedRules = $validator->errors()->first('email');
+            
             if ($failedRules == 'is invalid'){
                 return response()->json([
                     'email' => $request->email,
